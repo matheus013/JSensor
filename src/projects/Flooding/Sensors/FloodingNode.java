@@ -1,13 +1,13 @@
 package projects.Flooding.Sensors;
 
-import java.util.LinkedList;
-
-import jsensor.runtime.Jsensor;
 import jsensor.nodes.Node;
 import jsensor.nodes.messages.Inbox;
 import jsensor.nodes.messages.Message;
+import jsensor.runtime.Jsensor;
 import projects.Flooding.Messages.FloodingMessage;
-import projects.Flooding.Timers.FloodingTimer;
+import projects.Flooding.Timers.Singleton.Singleton;
+
+import java.util.LinkedList;
 
 
 /**
@@ -60,8 +60,7 @@ public class FloodingNode extends Node {
         //sends the first messages if is one of the selected nodes
         if (this.ID < 30) {
             int time = 10 + this.ID * 10;
-            FloodingTimer ft = new FloodingTimer();
-            ft.startRelative(time, this);
+            Singleton.getInstance().startRelative(time, this);
         }
     }
 }
