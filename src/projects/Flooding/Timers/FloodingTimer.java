@@ -34,8 +34,8 @@ public class FloodingTimer extends TimerEvent {
 
     @Override
     public void fire() {
-        MakeCenter center = new MakeCenter(this.node);
-        FloodingMessage message = center.getMessage();
+        MakeCenter center = new MakeCenter(this.node.getRandomNode("FloodingNode"));
+        FloodingMessage message = (FloodingMessage) center.getMessage().clone();
 
         Jsensor.log("time: " + Jsensor.currentTime + message.toString());
 
