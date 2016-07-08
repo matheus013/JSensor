@@ -2,6 +2,7 @@ package projects.Flooding.Messages;
 
 import jsensor.nodes.Node;
 import jsensor.nodes.messages.Message;
+import projects.Flooding.Timers.FloodingTimer;
 
 /**
  * @author Matheus

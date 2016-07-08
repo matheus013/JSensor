@@ -29,16 +29,7 @@ public class FloodingTimer extends TimerEvent {
             }
             break;
         }
-        try {
-            return destination;
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-        return new FloodingNode();
-    }
-
-    public Node currentNode() {
-        return this.node;
+        return destination;
     }
 
     @Override
