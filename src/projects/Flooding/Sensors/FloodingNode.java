@@ -32,6 +32,7 @@ public class FloodingNode extends Node {
                 this.messagesIDs.add(floodingMessage.getID());
 
                 if (floodingMessage.getDestination().equals(this)) {
+                    System.out.println(message.toString());
                     Jsensor.log("time: " + Jsensor.currentTime +
                             "\t sensorID: " + this.ID +
                             "\t receivedFrom: " + floodingMessage.getSender().getID());

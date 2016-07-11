@@ -95,6 +95,11 @@ public class FloodingMessage extends Message {
 
     @Override
     public String toString() {
-        return "\t sensorID: " + sender.getID() + "\t sendTo: " + destination.getID() + "\t " + msg;
+        try {
+            return "\t sensorID: " + sender.getID() + "\t sendTo: " + destination.getID() + "\t " + msg;
+        } catch (NullPointerException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 }

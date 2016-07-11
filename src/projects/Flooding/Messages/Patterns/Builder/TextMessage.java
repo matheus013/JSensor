@@ -27,11 +27,15 @@ public class TextMessage extends BuilderMessage {
 
     @Override
     void builderMessage() {
-        message.setMsg("Hello World");
+        message.setMsg("Hello World\t");
     }
 
     @Override
     void builderChunk() {
-        message.setChunk(this.node.getChunk());
+        try {
+            message.setChunk(this.node.getChunk());
+        } catch (NullPointerException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

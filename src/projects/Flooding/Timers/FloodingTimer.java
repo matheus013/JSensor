@@ -38,8 +38,13 @@ public class FloodingTimer extends TimerEvent {
         FloodingMessage message = (FloodingMessage) center.getMessage().clone();
 
         Jsensor.log("time: " + Jsensor.currentTime + message.toString());
+//        System.out.println(message.getSender().getID() + " " + message.getDestination().getID());
+        try {
+            GenerateFilesOmnet.addStartNode(message.getSender().getID(), message.getDestination().getID(), Jsensor.currentTime);
+        } catch (Exception ex) {
 
-        GenerateFilesOmnet.addStartNode(message.getSender().getID(), message.getDestination().getID(), Jsensor.currentTime);
+            System.out.println(ex.getMessage());
+        }
         this.node.multicast(message);
     }
 }
