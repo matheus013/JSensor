@@ -5,6 +5,7 @@ import jsensor.nodes.Node;
 import jsensor.nodes.events.TimerEvent;
 import jsensor.utils.GenerateFilesOmnet;
 import projects.Flooding.Messages.FloodingMessage;
+import projects.Flooding.Messages.Patterns.Builder.MakeCenter;
 
 
 /**
@@ -28,12 +29,9 @@ public class FloodingTimer extends TimerEvent {
             }
             break;
         }
+        MakeCenter maker = new MakeCenter(this.node);
+        FloodingMessage message = maker.getTemperatureMessage();
 
-        FloodingMessage message = new FloodingMessage(this.node, destination, 0, "" + this.node.getID(), this.node.getChunk());
-
-        String messagetext = "Created by the sensor: " + Integer.toString(this.node.getID()) + " Path: ";
-
-        message.setMsg(messagetext);
         Jsensor.log("time: " + Jsensor.currentTime + "\t sensorID: " + this.node.getID() + "\t sendTo: " + destination.getID());
 
         GenerateFilesOmnet.addStartNode(this.node.getID(), destination.getID(), Jsensor.currentTime);

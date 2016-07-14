@@ -24,7 +24,7 @@ public class MakeCenter {
     }
 
     private void makeTemperatureMessage() {
-        builderMessage = new TemperatureMessage();
+        builderMessage = new TemperatureMessage(node);
         builderMessage.builderChunk();
         builderMessage.builderDestination();
         builderMessage.builderSender();
