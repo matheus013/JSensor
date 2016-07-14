@@ -5,7 +5,7 @@ import jsensor.nodes.messages.Inbox;
 import jsensor.nodes.messages.Message;
 import jsensor.runtime.Jsensor;
 import projects.Flooding.Messages.FloodingMessage;
-import projects.Flooding.Timers.Singleton.Singleton;
+import projects.Flooding.Timers.FloodingTimer;
 
 import java.util.LinkedList;
 
@@ -32,10 +32,11 @@ public class FloodingNode extends Node {
                 this.messagesIDs.add(floodingMessage.getID());
 
                 if (floodingMessage.getDestination().equals(this)) {
-                    System.out.println(message.toString());
                     Jsensor.log("time: " + Jsensor.currentTime +
                             "\t sensorID: " + this.ID +
-                            "\t receivedFrom: " + floodingMessage.getSender().getID());
+                            "\t receivedFrom: " + floodingMessage.getSender().getID() +
+                            "\t hops: " + floodingMessage.getHops() +
+                            "\t msg: " + floodingMessage.getMsg().concat(this.ID + ""));
                 } else {
                     int n = 999999;
                     int cont = 0;
@@ -59,9 +60,10 @@ public class FloodingNode extends Node {
         this.messagesIDs = new LinkedList<Long>();
 
         //sends the first messages if is one of the selected nodes
-        if (this.ID < 30) {
+        if (this.ID < 10) {
             int time = 10 + this.ID * 10;
-            Singleton.getInstance().startRelative(time, this);
+            FloodingTimer ft = new FloodingTimer();
+            ft.startRelative(time, this);
         }
     }
 }

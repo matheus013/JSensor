@@ -10,7 +10,7 @@ public class Singleton {
 
     private Singleton() {}
 
-    public static synchronized FloodingTimer getInstance() {
+    public static FloodingTimer getInstance() {
         return uniqueInstance;
     }
 }

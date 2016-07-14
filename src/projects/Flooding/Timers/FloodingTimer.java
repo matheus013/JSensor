@@ -1,12 +1,10 @@
 package projects.Flooding.Timers;
 
+import jsensor.runtime.Jsensor;
 import jsensor.nodes.Node;
 import jsensor.nodes.events.TimerEvent;
-import jsensor.runtime.Jsensor;
 import jsensor.utils.GenerateFilesOmnet;
 import projects.Flooding.Messages.FloodingMessage;
-import projects.Flooding.Messages.Patterns.Builder.MakeCenter;
-import projects.Flooding.Sensors.FloodingNode;
 
 
 /**
@@ -14,37 +12,31 @@ import projects.Flooding.Sensors.FloodingNode;
  */
 public class FloodingTimer extends TimerEvent {
 
+    @Override
+    public void fire() {
 
-    public FloodingNode getRandomNode() {
-        FloodingNode destination = (FloodingNode) this.node.getRandomNode("FloodingNode");
+        Node destination = this.node.getRandomNode("FloodingNode");
         while (true) {
             if (destination == null) {
-                destination = (FloodingNode) this.node.getRandomNode("FloodingNode");
+                destination = this.node.getRandomNode("FloodingNode");
                 continue;
             }
 
             if (this.node == destination) {
-                destination = (FloodingNode) this.node.getRandomNode("FloodingNode");
+                destination = this.node.getRandomNode("FloodingNode");
                 continue;
             }
             break;
         }
-        return destination;
-    }
 
-    @Override
-    public void fire() {
-        MakeCenter center = new MakeCenter(this.node.getRandomNode("FloodingNode"));
-        FloodingMessage message = (FloodingMessage) center.getMessage().clone();
+        FloodingMessage message = new FloodingMessage(this.node, destination, 0, "" + this.node.getID(), this.node.getChunk());
 
-        Jsensor.log("time: " + Jsensor.currentTime + message.toString());
-//        System.out.println(message.getSender().getID() + " " + message.getDestination().getID());
-        try {
-            GenerateFilesOmnet.addStartNode(message.getSender().getID(), message.getDestination().getID(), Jsensor.currentTime);
-        } catch (Exception ex) {
+        String messagetext = "Created by the sensor: " + Integer.toString(this.node.getID()) + " Path: ";
 
-            System.out.println(ex.getMessage());
-        }
+        message.setMsg(messagetext);
+        Jsensor.log("time: " + Jsensor.currentTime + "\t sensorID: " + this.node.getID() + "\t sendTo: " + destination.getID());
+
+        GenerateFilesOmnet.addStartNode(this.node.getID(), destination.getID(), Jsensor.currentTime);
         this.node.multicast(message);
     }
 }

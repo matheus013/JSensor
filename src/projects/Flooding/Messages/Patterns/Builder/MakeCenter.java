@@ -8,12 +8,14 @@ import projects.Flooding.Messages.FloodingMessage;
  */
 public class MakeCenter {
     BuilderMessage builderMessage;
+    Node node;
 
     public MakeCenter(Node node) {
-        builderMessage = new TextMessage(node);
+        this.node = node;
     }
 
     private void makeTextMessage() {
+        builderMessage = new TextMessage(node);
         builderMessage.builderChunk();
         builderMessage.builderDestination();
         builderMessage.builderSender();
@@ -21,8 +23,22 @@ public class MakeCenter {
         builderMessage.builderMessage();
     }
 
-    public FloodingMessage getMessage() {
+    private void makeTemperatureMessage() {
+        builderMessage = new TemperatureMessage();
+        builderMessage.builderChunk();
+        builderMessage.builderDestination();
+        builderMessage.builderSender();
+        builderMessage.builderHops();
+        builderMessage.builderMessage();
+    }
+
+    public FloodingMessage getTextMessage() {
         makeTextMessage();
+        return builderMessage.getMessage();
+    }
+
+    public FloodingMessage getTemperatureMessage() {
+        makeTemperatureMessage();
         return builderMessage.getMessage();
     }
 }

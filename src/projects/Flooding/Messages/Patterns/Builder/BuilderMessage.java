@@ -4,6 +4,7 @@ import jsensor.nodes.Node;
 import projects.Flooding.Messages.FloodingMessage;
 import projects.Flooding.Timers.Singleton.Singleton;
 
+
 /**
  * Created by matheus on 08/07/16.
  */
@@ -16,20 +17,32 @@ public abstract class BuilderMessage {
     }
 
     public Node getDestine() {
-        return Singleton.getInstance().getRandomNode();
+        return null;
     }
 
-    abstract void builderSender();
+    public void builderSender() {
+        message.setSender(this.node);
+    }
 
-    abstract void builderDestination();
+    public void builderDestination() {
+        message.setDestination(getDestine());
+    }
 
-    abstract void builderHops();
+    public void builderHops() {
+        message.setHops(0);
+    }
 
-    abstract void builderMessage();
+    public abstract void builderMessage();
 
-    abstract void builderChunk();
+    public void builderChunk() {
+        try {
+            message.setChunk(this.node.getChunk());
+        } catch (NullPointerException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
     public FloodingMessage getMessage() {
-        return new FloodingMessage(message);
+        return (FloodingMessage) message.clone();
     }
 }

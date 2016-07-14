@@ -11,31 +11,8 @@ public class TextMessage extends BuilderMessage {
     }
 
     @Override
-    void builderSender() {
-        message.setSender(this.node);
-    }
-
-    @Override
-    void builderDestination() {
-        message.setDestination(getDestine());
-    }
-
-    @Override
-    void builderHops() {
-        message.setHops(0);
-    }
-
-    @Override
-    void builderMessage() {
+    public void builderMessage() {
         message.setMsg("Hello World\t");
     }
 
-    @Override
-    void builderChunk() {
-        try {
-            message.setChunk(this.node.getChunk());
-        } catch (NullPointerException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
 }

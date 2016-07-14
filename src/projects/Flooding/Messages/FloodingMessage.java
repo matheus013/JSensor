@@ -2,7 +2,6 @@ package projects.Flooding.Messages;
 
 import jsensor.nodes.Node;
 import jsensor.nodes.messages.Message;
-import projects.Flooding.Timers.FloodingTimer;
 
 /**
  * @author Matheus
@@ -14,20 +13,6 @@ public class FloodingMessage extends Message {
     private Node destination;
     private int hops;
     short chunk;
-
-    public FloodingMessage() {
-
-    }
-
-    public FloodingMessage(FloodingMessage message) {
-        setChunk(message.getChunk());
-        setSender(message.getSender());
-        setMsg(message.getMsg());
-        setHops(message.getHops());
-        setDestination(message.getDestination());
-        setID(message.getID());
-
-    }
 
     public FloodingMessage(Node sender, Node destination, int hops, String message, short chunk) {
         //Call to create a new ID
@@ -46,6 +31,10 @@ public class FloodingMessage extends Message {
         this.sender = sender;
         this.destination = destination;
         this.hops = hops;
+    }
+
+    public FloodingMessage() {
+
     }
 
     public String getMsg() {
@@ -84,22 +73,12 @@ public class FloodingMessage extends Message {
         this.sender = sender;
     }
 
-    public void setChunk(short chunk) {
-        this.chunk = chunk;
-    }
-
     @Override
     public Message clone() {
         return new FloodingMessage(msg, sender, destination, hops + 1, this.getID());
     }
 
-    @Override
-    public String toString() {
-        try {
-            return "\t sensorID: " + sender.getID() + "\t sendTo: " + destination.getID() + "\t " + msg;
-        } catch (NullPointerException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return null;
+    public void setChunk(short chunk) {
+        this.chunk = chunk;
     }
 }
