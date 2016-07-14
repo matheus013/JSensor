@@ -8,9 +8,15 @@ import projects.Flooding.Timers.FloodingTimer;
 public class Singleton {
     private static FloodingTimer uniqueInstance = new FloodingTimer();
 
-    private Singleton() {}
+    private Singleton() {
+    }
 
     public static FloodingTimer getInstance() {
         return uniqueInstance;
+    }
+
+
+    public static FloodingTimer getNewInstance() {
+        return new FloodingTimer();
     }
 }

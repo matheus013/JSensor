@@ -2,8 +2,6 @@ package projects.Flooding.Messages.Patterns.Builder;
 
 import jsensor.nodes.Node;
 
-import java.util.Random;
-
 /**
  * Created by matheus on 13/07/16.
  */
@@ -15,7 +13,7 @@ public class TemperatureMessage extends BuilderMessage {
 
     @Override
     public void builderMessage() {
-        message.setMsg("Está fazendo " + (new Random()).ints(10, 50));
+        message.setMsg("Temperature: " + 25 + "º ");
     }
 
 }

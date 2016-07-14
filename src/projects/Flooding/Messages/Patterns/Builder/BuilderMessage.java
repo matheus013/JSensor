@@ -2,8 +2,7 @@ package projects.Flooding.Messages.Patterns.Builder;
 
 import jsensor.nodes.Node;
 import projects.Flooding.Messages.FloodingMessage;
-import projects.Flooding.Timers.Singleton.Singleton;
-
+import projects.Flooding.Sensors.FloodingNode;
 
 /**
  * Created by matheus on 08/07/16.
@@ -17,7 +16,7 @@ public abstract class BuilderMessage {
     }
 
     public Node getDestine() {
-        return null;
+        return ((FloodingNode) node).getDestination();
     }
 
     public void builderSender() {

@@ -2,6 +2,7 @@ package projects.Flooding.Messages;
 
 import jsensor.nodes.Node;
 import jsensor.nodes.messages.Message;
+import jsensor.runtime.Jsensor;
 
 /**
  * @author Matheus
@@ -80,5 +81,9 @@ public class FloodingMessage extends Message {
 
     public void setChunk(short chunk) {
         this.chunk = chunk;
+    }
+
+    public String getLog() {
+        return "time: " + Jsensor.currentTime + "\t sensorID: " + this.sender.getID() + "\t sendTo: " + destination.getID();
     }
 }
