@@ -20,7 +20,6 @@ public class FloodingTimer extends TimerEvent {
         FloodingMessage message = maker.getTemperatureMessage();
 
         Jsensor.log(message.getLog());
-
         GenerateFilesOmnet.addStartNode(message.getSender().getID(), message.getDestination().getID(), Jsensor.currentTime);
         this.node.multicast(message);
     }

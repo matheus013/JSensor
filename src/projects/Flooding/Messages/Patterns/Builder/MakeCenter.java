@@ -14,7 +14,7 @@ public class MakeCenter {
         this.node = node;
     }
 
-    private void makeTextMessage() {
+    void makeTextMessage() {
         builderMessage = new TextMessage(node);
         builderMessage.builderChunk();
         builderMessage.builderDestination();
